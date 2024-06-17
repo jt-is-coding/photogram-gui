@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get("/users/:username", { :controller => "user", :action => "show" })
   # post("update_user/:username", { :controller => "user", :action => "update" })
 
-  get("/photos", { :controller => "photos", :action => "index" })
-  get("/photos/:photo_number", { :controller => "photos", :action => "show" })
-  # post("update_photo/:photo_number", { :controller => "photos", :action => "update" })
+  get("/photos", { :controller => "photo", :action => "index" })
+  get("/photos/:photo_number", { :controller => "photo", :action => "show" })
+  # post("update_photo/:photo_number", { :controller => "photo", :action => "update" })
 
 end

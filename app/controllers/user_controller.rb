@@ -7,4 +7,8 @@ class UserController < ApplicationController
   def show
     render({ :template => "/user_templates/details"})
   end
+
+  # def updates
+
+  # end
 end

@@ -1,0 +1,74 @@
+<% matching_records = Photo.where({ :id => params.fetch(:photo_number) }) %>
+<% @photo = matching_records.at(0) %>
+
+<h1>Photo Details</h1>
+
+<dt>Image</dt>
+<dd><img src="<%= @photo.image %>"></dd>
+
+<dt>Caption</dt>
+<dd>
+  <p><%= @photo.caption %></p>
+</dd>
+
+<dt>Owner</dt>
+<dd><%= @photo.poster.username %></dd>
+
+<dt>Posted</dt>
+<dd><%= @photo.created_at %></dd>
+
+<dt>Edit photo</dt>
+<dd>
+  <form action="/update_photo/:photo_number" method="post">
+
+    <label for="image_text">Image</label>
+    <input type="text" name="update_image" id="image_text" value="<%= @photo.image %>">
+
+    <label for="caption_text"Caption></label>
+    <textarea id="caption_text" name="update_caption"><%= @photo.caption %></textarea>
+
+    <button>Update photo</button>
+
+  </form>
+</dd>
+
+<dt>Delete photo</dt>
+<dd><a href="/delete_photo/:photo_number">Delete this photo</a></dd>
+
+<h2>Comments</h2>
+<table>
+
+  <th>Commenter</th>
+
+  <th>Comment</th>
+
+  <th>Posted</th>
+
+  <% @photo.comments.each do |a_comment| %>
+    
+    <tr>
+
+      <td><%= a_comment.commenter.username %></td>
+
+      <td><%= a_comment.body %></td>
+
+      <td><%= a_comment.created_at %></td>
+
+    </tr>
+
+  <% end%>
+</table>
+
+<h3>Add a new comment</h3>
+<form action="/add_comment" method="post">
+  <label for="comment_photo_id">Photo ID</label>
+  <input type="text" name="photo_text" id="comment_photo_id" value="<%= @photo.id %>">
+
+  <label for="comment_author_id">Author ID</label>
+  <input type="text" name="author_text" id="comment_author_id" placeholder="Enter your Author ID">
+
+  <label for="comment_body">Comment</label>
+  <textarea id="comment_body" type="text" placeholder="Enter a comment..." name="photo_comment"></textarea>
+
+  <button>Add comment</button>
+</form>
