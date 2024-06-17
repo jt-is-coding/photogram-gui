@@ -5,7 +5,7 @@ class UserController < ApplicationController
   end
 
   def show
-    matching_records = User.where({ :id => params.fetch(:username) })
+    matching_records = User.where({ :username => params.fetch(:username) })
     @user = matching_records.at(0)
     render({ :template => "/user_templates/details"})
 
@@ -16,7 +16,7 @@ class UserController < ApplicationController
     new_user.username = params.fetch("new_user")
 
     new_user.save
-    redirect_to("/users/#{new_user.id}")
+    redirect_to("/users/#{new_user.username}")
   end
 
   def update
@@ -25,7 +25,7 @@ class UserController < ApplicationController
 
     current_user.username = params.fetch("update_username")
     current_user.save
-    redirect_to("/users/#{current_user.id}")
+    redirect_to("/users/#{current_user.username}")
 
   end
 end

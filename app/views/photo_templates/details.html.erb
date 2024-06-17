@@ -16,12 +16,12 @@
 
 <dt>Edit photo</dt>
 <dd>
-  <form action="/update_photo/:photo_number" method="post">
+  <form action="/update_photo/<%= @photo.id %>" method="post">
 
     <label for="image_text">Image</label>
     <input type="text" name="update_image" id="image_text" value="<%= @photo.image %>">
 
-    <label for="caption_text"Caption></label>
+    <label for="caption_text">Caption</label>
     <textarea id="caption_text" name="update_caption"><%= @photo.caption %></textarea>
 
     <button>Update photo</button>
@@ -30,7 +30,7 @@
 </dd>
 
 <dt>Delete photo</dt>
-<dd><a href="/delete_photo/:photo_number">Delete this photo</a></dd>
+<dd><a href="/delete_photo/<%= @photo.id %>">Delete this photo</a></dd>
 
 <h2>Comments</h2>
 <table>
@@ -41,7 +41,7 @@
 
   <th>Posted</th>
 
-  <% @photo.comments.each do |a_comment| %>
+  <% @photo.comments.order({ :created_at => :desc }).each do |a_comment| %>
     
     <tr>
 
