@@ -5,7 +5,10 @@ class UserController < ApplicationController
   end
 
   def show
+    matching_records = User.where({ :id => params.fetch(:username) })
+    @user = matching_records.at(0)
     render({ :template => "/user_templates/details"})
+
   end
 
   def create
