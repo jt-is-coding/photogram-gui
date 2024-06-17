@@ -19,7 +19,13 @@ class UserController < ApplicationController
     redirect_to("/users/#{new_user.id}")
   end
 
-  # def update
+  def update
+    update = params.fetch("username")
+    current_user = User.where(id: update).at(0)
 
-  # end
+    current_user.username = params.fetch("update_username")
+    current_user.save
+    redirect_to("/users/#{current_user.id}")
+
+  end
 end
