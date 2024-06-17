@@ -21,12 +21,14 @@
   <th>Posted</th>
   <th></th>
 
+  <% @user.own_photos.each do |photo| %>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><a href="">Show details</a></td>
+    <td><img src="<%= photo.image %>"></td>
+    <td><%= photo.poster.username %></td>
+    <td><%= photo.caption %></td>
+    <td><%= photo.created_at %></td>
+    <td><a href="/photos/<%= photo.id %>">Show details</a></td>
   </tr>
+  <% end %>
 
 </table>
